@@ -1,0 +1,8 @@
+resource "aws_instance" "wp" {
+  ami                    = "${data.aws_ami.wp-ami.id}"
+  instance_type          = "t2.small"
+  subnet_id              = "${module.vpc.public_subnets[0]}"
+  vpc_security_group_ids = ["${aws_security_group.wp-sg.id}"]
+  key_name               = "${aws_key_pair.mykeypair.key_name}"
+  user_data = "${data.template_file.init.rendered}"
+}
