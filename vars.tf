@@ -3,7 +3,7 @@ variable "aws_access_key" {}
 variable "aws_secret_key" {}
 
 variable "aws_region" {
-  default = "us-west-2"
+  default = "us-east-1"
 }
 
 variable "delegation_set" {}
@@ -27,3 +27,7 @@ variable "db_user" {
 variable "db_name" {
   default = "wpdb"
 }
+
+variable "domain_name" {}
+
+# variable "aliases" {}

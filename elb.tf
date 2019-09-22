@@ -6,8 +6,9 @@ resource "aws_elb" "wp-elb" {
   listener {
     instance_port     = 80
     instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
+    lb_port           = 443
+    lb_protocol       = "https"
+    ssl_certificate_id = "${aws_acm_certificate.cert.arn}"
   }
 
   health_check {

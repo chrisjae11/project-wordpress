@@ -1,13 +1,21 @@
 resource "aws_route53_zone" "primary" {
-  name              = "${var.domain_name}"
+  name              = "logicflux.tech"
   delegation_set_id = "${var.delegation_set}"
   force_destroy     = true
 
 }
 
-resource "aws_route53_record" "apex-wp" {
+resource "aws_route53_record" "www-wp" {
   zone_id = "${aws_route53_zone.primary.zone_id}"
-  name    = "${var.domain_name}"
+  name    = "www.logicflux.tech"
+  type    = "CNAME"
+  ttl     = "300"
+  records = ["${aws_elb.wp-elb.dns_name}"]
+}
+
+resource "aws_route53_record" "apex" {
+  zone_id = "${aws_route53_zone.primary.zone_id}"
+  name    = "logicflux.tech"
   type    = "A"
 
   alias {
@@ -15,14 +23,4 @@ resource "aws_route53_record" "apex-wp" {
     zone_id                = "${aws_elb.wp-elb.zone_id}"
     evaluate_target_health = false
   }
-
-}
-
-resource "aws_route53_record" "www-wp" {
-  zone_id = "${aws_route53_zone.primary.zone_id}"
-  name    = "www.${var.domain_name}"
-  type    = "CNAME"
-  ttl = "300"
-  records = ["${aws_elb.wp-elb.dns_name}"]
-
 }
