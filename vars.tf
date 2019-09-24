@@ -29,5 +29,11 @@ variable "db_name" {
 }
 
 variable "domain_name" {}
+variable "asg-names" {
+  default = "woredpress-asg"
+}
 
 # variable "aliases" {}
+variable "channel" {}
+variable  "username" {}
+variable "webhook_id" {}
