@@ -30,7 +30,7 @@ variable "db_name" {
 
 variable "domain_name" {}
 variable "asg-names" {
-  default = "woredpress-asg"
+  default = "wordpress-asg"
 }
 
 # variable "aliases" {}

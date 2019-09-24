@@ -11,7 +11,7 @@ resource "aws_launch_configuration" "wp-launch" {
 }
 
 resource "aws_autoscaling_group" "wp-asg" {
-  name                 = "woredpress-asg"
+  name                 = "wordpress-asg"
   launch_configuration = "${aws_launch_configuration.wp-launch.name}"
   min_size             = 2
   max_size             = 4
